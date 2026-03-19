@@ -23,8 +23,17 @@ st.set_page_config(
 APP_DIR = Path(__file__).resolve().parent
 ROOT_DIR = APP_DIR.parent
 DEFAULT_DATA_PATH = ROOT_DIR / "data" / "customer_support_tickets.csv"
+FALLBACK_DATA_PATHS = [
+    APP_DIR / "artifact" / "corpus.csv",
+    APP_DIR / "artifacts" / "corpus.csv",
+    ROOT_DIR / "artifact" / "corpus.csv",
+    ROOT_DIR / "artifacts" / "corpus.csv",
+]
 ARTIFACT_DIRS = [
+    APP_DIR / "artifact",
     APP_DIR / "artifacts",
+    ROOT_DIR / "streamlit_app" / "artifact",
+    ROOT_DIR / "streamlit_app" / "artifacts",
     ROOT_DIR / "artifacts",
     ROOT_DIR / "artifact",
 ]
@@ -558,7 +567,9 @@ def build_from_csv(csv_path: Path) -> SearchArtifacts:
 def load_engine() -> HybridEngine:
     artifacts = load_from_artifacts()
     if artifacts is None:
-        artifacts = build_from_csv(DEFAULT_DATA_PATH)
+        csv_candidates = [DEFAULT_DATA_PATH] + FALLBACK_DATA_PATHS
+        csv_path = next((p for p in csv_candidates if p.exists()), DEFAULT_DATA_PATH)
+        artifacts = build_from_csv(csv_path)
     return HybridEngine(artifacts)
 
 

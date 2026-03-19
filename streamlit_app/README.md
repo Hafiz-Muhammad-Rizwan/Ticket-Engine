@@ -12,7 +12,8 @@
 - `streamlit_app/artifacts/` - optional exported notebook artifacts
 
 ## 3. Recommended Artifacts From Kaggle
-Copy these files from Kaggle `/kaggle/working/artifacts` into `streamlit_app/artifacts/`:
+Copy these files from Kaggle `/kaggle/working/artifacts` into `streamlit_app/artifact/`.
+The app also supports `streamlit_app/artifacts/` for compatibility:
 - `metadata.json`
 - `idf.npy`
 - `embed_matrix.npy`
