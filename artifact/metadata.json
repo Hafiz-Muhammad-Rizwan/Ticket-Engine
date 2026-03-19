@@ -1,0 +1,16 @@
+{
+  "text_col": "Ticket Description",
+  "type_col": "Ticket Type",
+  "channel_col": "Ticket Channel",
+  "resolution_col": "Resolution",
+  "vocab_size": 5000,
+  "embedding_dim": 300,
+  "known_channels": [
+    "Chat",
+    "Email",
+    "Phone",
+    "Social media"
+  ],
+  "channel_unk_idx": 4,
+  "gpu_count_detected": 2
+}
